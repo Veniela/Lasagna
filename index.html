@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Лазанья і томат</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        background: #a0e0ff;
+      }
+
+      .sprite {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        transform: translate(-50%, -50%);
+      }
+
+      #lasagna {
+        width: 100px;
+        height: 80px;
+      }
+
+      #tomato {
+        width: 60px;
+        height: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <img id="lasagna" class="sprite" src="./lasagna.png" alt="lasagna" />
+    <img id="tomato" class="sprite" src="./tomato.png" alt="tomato" />
+
+    <script>
+      const lasagna = document.getElementById("lasagna");
+      const tomato = document.getElementById("tomato");
+
+      // Позиція та швидкість лазаньї
+      let lasagnaX = window.innerWidth / 2;
+      let lasagnaY = window.innerHeight / 2;
+      let lasagnaSpeedX =
+        (Math.random() * 2 + 1) * (Math.random() < 0.5 ? 1 : -1);
+      let lasagnaSpeedY =
+        (Math.random() * 2 + 1) * (Math.random() < 0.5 ? 1 : -1);
+
+      // Позиція та швидкість томата
+      let tomatoX = (2 * window.innerWidth) / 3;
+      let tomatoY = window.innerHeight / 2;
+      let tomatoSpeedX =
+        (Math.random() * 2 + 0.5) * (Math.random() < 0.5 ? 1 : -1);
+      let tomatoSpeedY =
+        (Math.random() * 2 + 0.5) * (Math.random() < 0.5 ? 1 : -1);
+
+      function move() {
+        // Рух лазаньї
+        lasagnaX += lasagnaSpeedX;
+        lasagnaY += lasagnaSpeedY;
+        if (lasagnaX + lasagna.width >= window.innerWidth || lasagnaX <= 0)
+          lasagnaSpeedX *= -1;
+        if (lasagnaY + lasagna.height >= window.innerHeight || lasagnaY <= 0)
+          lasagnaSpeedY *= -1;
+        lasagna.style.left = lasagnaX + "px";
+        lasagna.style.top = lasagnaY + "px";
+
+        // Рух томата
+        tomatoX += tomatoSpeedX;
+        tomatoY += tomatoSpeedY;
+        if (tomatoX + tomato.width >= window.innerWidth || tomatoX <= 0)
+          tomatoSpeedX *= -1;
+        if (tomatoY + tomato.height >= window.innerHeight || tomatoY <= 0)
+          tomatoSpeedY *= -1;
+        tomato.style.left = tomatoX + "px";
+        tomato.style.top = tomatoY + "px";
+
+        requestAnimationFrame(move);
+      }
+
+      move();
+    </script>
+  </body>
+</html>
